@@ -25,6 +25,7 @@ def random_moves(m, n, a):
         a = agent_move(a, rnd1, rnd2)
     return a
 
+
 ################################################
 # function to create an array with user inputs #
 ################################################
@@ -41,6 +42,7 @@ def array_gen_print():
 
     return m, n, a
 
+
 ###########################################################
 # function to find the non zero element from all the rows #
 ###########################################################
@@ -49,6 +51,7 @@ def index_of_last_nonzero(lst):
         if value != 0:
             return len(lst) - i - 1
     return -1
+
 
 #########################################################
 # function to move the from top of one stack to another #
@@ -62,6 +65,7 @@ def agent_move(a, rnd1, rnd2):
     a[rnd1][k_rnd1] = a[rnd2][k_rnd2 + 1]
     a[rnd2][k_rnd2 + 1] = store
     return a
+
 
 ##################################################
 # function to find the blocks above and location #
@@ -78,6 +82,7 @@ def position(state, goal_position, blocks):
     return blocks_above, location
     del blocks_above, location
 
+
 ###################################################
 # function to calculate the total of above blocks #
 ###################################################
@@ -89,29 +94,3 @@ def H_cal(blocks_above, blocks):
     del temp_blocks
     return h
 
-###########################
-# function for Heuristics # [ Need to understand this]
-###########################
-def h_func(state):
-    C1 = []
-    C2 = []
-    for i in range(0, len(state)):
-        for j in range(1, len(state[0]) + 1):
-            if j in state[i]:
-                k = state[i].index(j)
-                last_ind = index_of_last_nonzero(state[i])
-                cost1 = (last_ind - k) + 1
-                if (((index_of_last_nonzero(state[0])) - (j - 1) + 1) >= 0):
-                    cost2 = ((index_of_last_nonzero(state[0])) - (j - 1) + 1)
-                else:
-                    cost2 = 0
-                C1.append(cost1)
-                C2.append(cost2)
-                # print "C=" + str(cost1) + "," + str(cost2)
-                # print str(j) + "location= " + str(i) + "," + str(k)
-
-    # print C1
-    # print C2
-    COST = sum(C1) + sum(C2)
-    # print COST
-    return COST
